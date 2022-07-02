@@ -45,6 +45,20 @@ const options = {
             }
         ]
     },
+    components: {
+        securitySchemes: {
+          jwt: {
+            type: "http",
+            scheme: "bearer",
+            in: "header",
+            bearerFormat: "JWT"
+          },
+        }
+      }
+      ,
+      security: [{
+        jwt: []
+      }],
     apis: ["./src/router/*.js"]
 }
 

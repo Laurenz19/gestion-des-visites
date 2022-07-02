@@ -49,6 +49,8 @@ const idlength = 5
  *  get:
  *      summary: Returns the list of visitors 
  *      tags: [Visitors]
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: A list of visitors
@@ -78,6 +80,8 @@ router.get("/", (req, res)=>{
  *              type: string
  *          required: true
  *          description: The visitor name
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visitor description by name
@@ -113,6 +117,8 @@ router.get("/", (req, res)=>{
  *              type: string
  *          required: true
  *          description: The visitor id
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visitor description by id
@@ -146,6 +152,8 @@ router.get("/:id", (req, res)=>{
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Visitor'
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visitor was successfully created
@@ -190,6 +198,8 @@ router.post("/", (req, res)=>{
  *              application/json: 
  *                  schema:
  *                      $ref: '#/components/schemas/Visitor'
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visitor was succesfully updated
@@ -232,6 +242,8 @@ router.put("/:id", (req, res)=>{
  *              type: string
  *            required: true
  *            description: The visitor's id
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visitor was successfully deleted

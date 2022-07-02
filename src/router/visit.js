@@ -82,6 +82,8 @@ router.get('/', (req, res)=>{
  *              type: string
  *            required: true
  *            description: The site id
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: Returns All visits by site_id
@@ -173,6 +175,8 @@ router.get('/sites/:site_id/visitors/:visitor_id', (req, res)=>{
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Visit'
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visit was successfully created
@@ -235,6 +239,8 @@ router.post('/', (req, res)=>{
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Visit'
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visit was successfully updated
@@ -291,6 +297,8 @@ router.put('/:id', (req, res)=>{
  *            schema:
  *              type: string
  *              description: The visit id
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The visit was successfully deleted

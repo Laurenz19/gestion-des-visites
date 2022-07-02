@@ -71,6 +71,8 @@ router.get("/", (req, res)=>{
  *  get: 
  *      summary: Returns a list of an amount total & number of the visit for each site
  *      tags: [Sites]
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: List of an amount total & number of the visit for each site
@@ -176,6 +178,8 @@ router.get("/:id", (req, res)=>{
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Site'
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The site was successfully created
@@ -220,6 +224,8 @@ router.post("/", (req, res)=>{
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Site'
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The site was successfully updated
@@ -261,6 +267,8 @@ router.put("/:id", (req, res)=>{
  *              type: string
  *            required: true
  *            description: The site id
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The site was successfully deleted
