@@ -20,6 +20,7 @@ const idlength = 5
  *              id:
  *                  type: string
  *                  description: The site's id (auto generated)
+ *                  readOnly: true
  *              name:
  *                  type: string
  *                  description: The name of the site
@@ -34,6 +35,7 @@ const idlength = 5
  *              name: "Site touristique"
  *              place: "The place of the site"
  *              tarif: 1000
+ *          
  */
 
 /**
@@ -61,6 +63,71 @@ const idlength = 5
 router.get("/", (req, res)=>{
     let sites = req.app.db.get("sites")
     res.send(sites)
+})
+
+/**
+ * @swagger
+ * /api/sites/all:
+ *  get: 
+ *      summary: Returns a list of an amount total & number of the visit for each site
+ *      tags: [Sites]
+ *      responses:
+ *          '200':
+ *              description: List of an amount total & number of the visit for each site
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          site_log:
+ *                              type: array
+ *                              items: object
+ *                              properties:
+ *                                  name: 
+ *                                      type: string
+ *                                      description: name of the site
+ *                                  nbVisits:
+ *                                      type: integer
+ *                                      description: Total number of visits
+ *                                  total:
+ *                                      type: number
+ *                                      description: Amount total
+ *                          
+ *          '500':
+ *              description: Some server error
+ */
+ router.get("/all", (req, res)=>{
+    try {
+        let sites = req.app.db.get('sites').value()
+
+        let log = []
+
+        sites.forEach(site => {
+            let visits = req.app.db.get("visits").filter({site_id: site.id}).value()
+            if(!visits){
+                log.push({
+                    "name": site.name,
+                    "nbVisits": 0,
+                    "total": 0
+                })
+            }else{
+                let total = 0
+                let nbVisits = 0
+                visits.forEach(visit => {
+                    let amount = site.tarif * visit.duration
+                    total += amount
+                    nbVisits++                    
+                });
+                
+                log.push({
+                    "name": site.name,
+                    "nbVisits": nbVisits,
+                    "total": total
+                })
+            }
+        }); 
+        res.send(log)  
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 
@@ -212,5 +279,6 @@ router.delete("/:id", (req, res)=>{
         res.sendStatus(200)
     }
 })
+
 
 module.exports = router

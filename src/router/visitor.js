@@ -22,6 +22,7 @@ const idlength = 5
  *              id: 
  *                  type: string
  *                  description: vistor's id (auto generate)
+ *                  readOnly: true
  *              name:
  *                  type: string
  *                  description: the visitor's complete name

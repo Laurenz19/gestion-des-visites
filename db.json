@@ -27,6 +27,42 @@
       "name": "Site touristique",
       "place": "Fianarantsoa",
       "tarif": 1000
+    },
+    {
+      "id": "cha2c",
+      "name": "Site touristique 2",
+      "place": "Toamasina",
+      "tarif": 2000
+    }
+  ],
+  "visits": [
+    {
+      "id": "xGIq1",
+      "visitor_id": "xlSYi",
+      "site_id": "cha1c",
+      "duration": 5,
+      "date_visit": "2001-12-15"
+    },
+    {
+      "id": "XGx_2",
+      "visitor_id": "bs2Sr",
+      "site_id": "cha1c",
+      "duration": 5,
+      "date_visit": "2001-12-15"
+    },
+    {
+      "id": "q_hPf",
+      "visitor_id": "dV58J",
+      "site_id": "cha1c",
+      "duration": 2,
+      "date_visit": "2001-12-15"
+    },
+    {
+      "id": "qhPfs",
+      "visitor_id": "FMwFj",
+      "site_id": "cha2c",
+      "duration": 1,
+      "date_visit": "2001-12-15"
     }
   ]
 }

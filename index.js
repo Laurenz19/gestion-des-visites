@@ -6,12 +6,13 @@ const swaggerJsDoc = require("swagger-jsdoc")
 const low  = require("lowdb")
 const visitorRoutes = require('./src/router/visitor')
 const siteRoutes = require('./src/router/site')
+const visitRoutes = require('./src/router/visit')
 
 //db
 const FileSync = require("lowdb/adapters/FileSync")
 const adapter = new FileSync("db.json")
 const db = low(adapter)
-db.defaults({visitors:[], sites:[]}).write()
+db.defaults({visitors:[], sites:[], visits:[]}).write()
 
 
 const app = express()
@@ -25,6 +26,7 @@ app.use(morgan("dev"))
 //routes
 app.use('/api/visitors', visitorRoutes)
 app.use('/api/sites', siteRoutes)
+app.use('/api/visits', visitRoutes)
 
 
 //swagger documentations configuration
