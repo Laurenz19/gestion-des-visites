@@ -1,0 +1,9 @@
+- express => npm install express --save
+- nodemon => npm install nodemon --save
+- lowdb ==> to store the data
+- nanoid => to generate unique id
+- cors => to setup the cors origin policy
+- swagger-jsdocs => to use swagger syntax to write documentation
+- swagger-ui-express => to serve the swagger ui in our express app
+- morgan to output the log for each request
+
