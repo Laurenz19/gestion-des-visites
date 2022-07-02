@@ -65,6 +65,40 @@ router.get("/", (req, res)=>{
     res.send(visitors)
 })
 
+/**
+ * @swagger
+ * /api/visitors/{visitor_name}:
+ *  get:
+ *      summary: Get the visitor by name
+ *      tags: [Visitors]
+ *      parameters:
+ *        - in: path
+ *          name: visitor_name
+ *          schema:         
+ *              type: string
+ *          required: true
+ *          description: The visitor name
+ *      responses:
+ *          '200':
+ *              description: The visitor description by name
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Visitor'
+ *          '404':
+ *              description: The visitor was not found
+ *               
+ */
+
+ router.get("/:visitor_name", (req, res)=>{
+    console.log(req.params.name)
+    const visitor = req.app.db.get("visitors").find({name: req.params.visitor_name}).value()
+    if(!visitor){
+        res.sendStatus(404)
+    }
+    res.send(visitor)
+})
+
 
 /**
  * @swagger
@@ -212,6 +246,7 @@ router.delete("/:id", (req, res)=>{
         res.sendStatus(404)
     }else{
         req.app.db.get("visitors").remove({id:req.params.id}).write()
+        req.app.db.get("visits").remove({visitor_id: req.params.id}).write()
         res.status(200).send("success")
     }
 })

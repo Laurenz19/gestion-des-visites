@@ -276,6 +276,7 @@ router.delete("/:id", (req, res)=>{
     }
     else{
         req.app.db.get("sites").remove({id: req.params.id}).write()
+        req.app.db.get("visits").remove({site_id: req.params.id}).write()
         res.sendStatus(200)
     }
 })
