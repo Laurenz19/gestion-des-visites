@@ -1,3 +1,32 @@
 {
-  "visitors": []
+  "visitors": [
+    {
+      "id": "FMwFj",
+      "name": "Sambany Michel Laurenzio",
+      "address": "Tanambao, Fianarantsoa"
+    },
+    {
+      "id": "dV58J",
+      "name": "Sambany Marie Laurenah",
+      "address": "Tanambao, Fianarantsoa"
+    },
+    {
+      "id": "bs2Sr",
+      "name": "Zara Marie Emerentienne",
+      "address": "Tanambao, Fianarantsoa"
+    },
+    {
+      "id": "xlSYi",
+      "name": "Sambany Razafiniandro Laurent",
+      "address": "Tanambao, Fianarantsoa"
+    }
+  ],
+  "sites": [
+    {
+      "id": "cha1c",
+      "name": "Site touristique",
+      "place": "Fianarantsoa",
+      "tarif": 1000
+    }
+  ]
 }

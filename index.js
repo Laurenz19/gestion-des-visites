@@ -5,12 +5,13 @@ const swaggerUI = require("swagger-ui-express")
 const swaggerJsDoc = require("swagger-jsdoc")
 const low  = require("lowdb")
 const visitorRoutes = require('./src/router/visitor')
+const siteRoutes = require('./src/router/site')
 
 //db
 const FileSync = require("lowdb/adapters/FileSync")
 const adapter = new FileSync("db.json")
 const db = low(adapter)
-db.defaults({visitors:[]}).write()
+db.defaults({visitors:[], sites:[]}).write()
 
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(morgan("dev"))
 
 //routes
 app.use('/api/visitors', visitorRoutes)
+app.use('/api/sites', siteRoutes)
 
 
 //swagger documentations configuration
@@ -35,7 +37,10 @@ const options = {
             description: "RestFul Api pour la gestion des visites touristiques"
         },
         servers:[
-            { url: "http://localhost:5000"}
+            { 
+                url: "http://localhost:5000",
+                description: "Local dev"
+            }
         ]
     },
     apis: ["./src/router/*.js"]
