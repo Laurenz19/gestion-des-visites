@@ -1,8 +1,8 @@
 const express = require("express")
-const nanoid = require("nanoid")
+const generatedId = require('../services/services')
 
 const router = express.Router()
-const idlength = 5
+const idlength = 8
 
 /**
  * @swagger
@@ -197,10 +197,6 @@ router.get('/sites/:site_id/visitors/:visitor_id', (req, res)=>{
  */
 router.post('/', (req, res)=>{
     try {
-        const visit = {
-            id: nanoid(idlength),
-            ...req.body
-        }
         
         let visitor = req.app.db.get('visitors').find({id: req.body.visitor_id})
         let site = req.app.db.get('sites').find({id: req.body.site_id})
@@ -212,6 +208,14 @@ router.post('/', (req, res)=>{
         }else if(!visitor.value()){
             res.status(404).send({"message": "Visitor was not found"})
         }else{
+            //count post request
+            let _visits= req.app.db.get("_visits").value()[0]
+            _visits.nb++
+
+            const visit = {
+                id: generatedId("VIS", _visits.nb, idlength),
+                ...req.body
+            }
             req.app.db.get('visits').push(visit).write()
             res.send(visit)
         }

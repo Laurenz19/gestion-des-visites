@@ -1,41 +1,20 @@
 {
-  "visitors": [
+  "visitors": [],
+  "_visitors": [
     {
-      "id": "FMwFj",
-      "name": "Sambany Michel Laurenzio",
-      "address": "Tanambao, Fianarantsoa"
-    },
-    {
-      "id": "dV58J",
-      "name": "Sambany Marie Laurenah",
-      "address": "Tanambao, Fianarantsoa"
-    },
-    {
-      "id": "bs2Sr",
-      "name": "Zara Marie Emerentienne",
-      "address": "Tanambao, Fianarantsoa"
-    },
-    {
-      "id": "xlSYi",
-      "name": "Sambany Razafiniandro Laurent",
-      "address": "Tanambao, Fianarantsoa"
+      "nb": 0
     }
   ],
-  "sites": [
+  "sites": [],
+  "_sites": [
     {
-      "id": "cha2c",
-      "name": "Site touristique 2",
-      "place": "Toamasina",
-      "tarif": 2000
+      "nb": 0
     }
   ],
-  "visits": [
+  "visits": [],
+  "_visits": [
     {
-      "id": "qhPfs",
-      "visitor_id": "FMwFj",
-      "site_id": "cha2c",
-      "duration": 1,
-      "date_visit": "2001-12-15"
+      "nb": 0
     }
   ]
 }

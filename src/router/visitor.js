@@ -1,12 +1,11 @@
 const express = require('express')
-const nanoid = require('nanoid')
+const generatedId = require('../services/services')
 
 
 const router = express.Router()
 
 
 const idlength = 5
-
 
 
 /**
@@ -166,12 +165,18 @@ router.get("/:id", (req, res)=>{
  */
 router.post("/", (req, res)=>{
     try {
+
+        console.log()
+        //count post request
+        let _visitors= req.app.db.get("_visitors").value()[0]
+        _visitors.nb++
         const visitor = {
-            id:nanoid(idlength),
+            id:generatedId("V", _visitors.nb, idlength),
             ...req.body
         }
-        
         req.app.db.get("visitors").push(visitor).write()
+    
+        // console.log(_visitors + 1)
         res.status(200).send(visitor)
     } catch (error) {
         return res.status(500).send(error)

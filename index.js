@@ -12,7 +12,14 @@ const visitRoutes = require('./src/router/visit')
 const FileSync = require("lowdb/adapters/FileSync")
 const adapter = new FileSync("db.json")
 const db = low(adapter)
-db.defaults({visitors:[], sites:[], visits:[]}).write()
+db.defaults({
+  visitors:[],
+  _visitors:[{"nb":0}],
+  sites:[],
+  _sites:[{"nb":0}],
+  visits:[],
+  _visits:[{"nb":0}]
+}).write()
 
 
 const app = express()
