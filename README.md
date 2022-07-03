@@ -6,4 +6,5 @@
 . Lancer le serveur
 > npm start
 
-Voir la documentation: http://localhost:5000/swagger
+. Voir la documentation: 
+> http://localhost:5000/swagger
