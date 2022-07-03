@@ -1,5 +1,6 @@
 const express = require('express')
 const generatedId = require('../services/services')
+const {authenticateToken} = require('../controller/authentication')
 
 const router = express.Router()
 
@@ -31,7 +32,6 @@ const idlength = 5
  *                  type: number
  *                  description: The tarif by day (Ariary)
  *          example:
- *              id: "S-0001"
  *              name: "Site touristique"
  *              place: "The place of the site"
  *              tarif: 1000
@@ -51,6 +51,8 @@ const idlength = 5
  *  get:
  *      summary: Returns all sites in the system
  *      tags: [Sites]
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The list of sites
@@ -60,7 +62,7 @@ const idlength = 5
  *                          $ref: '#/components/schemas/Site'
  */
 
-router.get("/", (req, res)=>{
+router.get("/", authenticateToken, (req, res)=>{
     let sites = req.app.db.get("sites")
     res.send(sites)
 })
@@ -96,7 +98,7 @@ router.get("/", (req, res)=>{
  *          '500':
  *              description: Some server error
  */
- router.get("/all", (req, res)=>{
+ router.get("/all", authenticateToken, (req, res)=>{
     try {
         let sites = req.app.db.get('sites').value()
 
@@ -146,6 +148,8 @@ router.get("/", (req, res)=>{
  *              type: string
  *            required: true
  *            description: The site id
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: Get the site by id
@@ -157,7 +161,7 @@ router.get("/", (req, res)=>{
  *              ddescription: The site was not found
  */
 
-router.get("/:id", (req, res)=>{
+router.get("/:id", authenticateToken, (req, res)=>{
     let site = req.app.db.get("sites").find({id: req.params.id}).value()
 
     if(!site) res.sendStatus(404)
@@ -191,7 +195,7 @@ router.get("/:id", (req, res)=>{
  *              description: Some server error
  */
 
-router.post("/", (req, res)=>{  
+router.post("/", authenticateToken, (req, res)=>{  
     try {
        
         //count post request
@@ -243,7 +247,7 @@ router.post("/", (req, res)=>{
  *              description: Some server error
  */
 
-router.put("/:id", (req, res)=>{
+router.put("/:id", authenticateToken, (req, res)=>{
     try {
         let site = req.app.db.get("sites").find({id: req.params.id})
         
@@ -280,7 +284,7 @@ router.put("/:id", (req, res)=>{
  *              description: The site was not found
  */
 
-router.delete("/:id", (req, res)=>{
+router.delete("/:id", authenticateToken, (req, res)=>{
     let site = req.app.db.get("sites").find({id: req.params.id})
         
     if(!site.value()){

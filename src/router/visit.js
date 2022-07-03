@@ -1,5 +1,6 @@
 const express = require("express")
 const generatedId = require('../services/services')
+const {authenticateToken} = require('../controller/authentication')
 
 const router = express.Router()
 const idlength = 8
@@ -34,7 +35,6 @@ const idlength = 8
  *                  format: date
  *                  description: The date of the visit
  *          example:
- *              id: string
  *              visitor_id: string
  *              site_id: string
  *              duration: 0
@@ -55,6 +55,8 @@ const idlength = 8
  *  get:
  *      summary: Returns all visits in the system
  *      tags: [Visits]
+ *      security:
+ *          - jwt: []
  *      responses:
  *          '200':
  *              description: The list of visits
@@ -64,7 +66,7 @@ const idlength = 8
  *                          $ref: '#/components/schemas/Visit'
  */
 
-router.get('/', (req, res)=>{
+router.get('/', authenticateToken, (req, res)=>{
     let visits = req.app.db.get("visits")
     res.send(visits)
 })
@@ -123,7 +125,7 @@ router.get('/', (req, res)=>{
  *          '500':
  *              description: Some server error
  */
-router.get('/sites/:id', (req, res)=>{
+router.get('/sites/:id', authenticateToken, (req, res)=>{
     try {
         let visits=req.app.db.get('visits').filter({site_id: req.params.id})
         let site = req.app.db.get('sites').find({id: req.params.id}).value()
@@ -195,7 +197,7 @@ router.get('/sites/:site_id/visitors/:visitor_id', (req, res)=>{
  *          '500':
  *              description: Some server error
  */
-router.post('/', (req, res)=>{
+router.post('/', authenticateToken, (req, res)=>{
     try {
         
         let visitor = req.app.db.get('visitors').find({id: req.body.visitor_id})
@@ -263,7 +265,7 @@ router.post('/', (req, res)=>{
  *          '500':
  *              description: Some server error
  */
-router.put('/:id', (req, res)=>{
+router.put('/:id', authenticateToken, (req, res)=>{
     try {
         let visit = req.app.db.get('visits').find({id:req.params.id}) 
         let visitor = req.app.db.get('visitors').find({id: req.body.visitor_id})
@@ -317,7 +319,7 @@ router.put('/:id', (req, res)=>{
  *          '500':
  *              description: Some server error
  */
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', authenticateToken, (req, res)=>{
     let visit = req.app.db.get("visits").find({id: req.params.id})
         
     if(!visit.value()){

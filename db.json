@@ -16,5 +16,30 @@
     {
       "nb": 0
     }
+  ],
+  "users": [
+    {
+      "id": "U01",
+      "username": "Laurenz19",
+      "email": "laurenziosambany@gmail.com",
+      "password": "$2a$10$HR6JXLb.4MvBbJN/7rPxfe/2D0oRTrnhgH1hsHVinQt0mIhis.mqa"
+    },
+    {
+      "id": "U0002",
+      "username": "Laurenz19",
+      "email": "laurenziosambany@gmail.com",
+      "password": "$2a$10$ihA/2WP8F4k.OlEisaEDmu.mO39lAmlL0TT1DuO9Z.VYGBG5Zilja"
+    },
+    {
+      "id": "U0003",
+      "username": "Laurenz19",
+      "email": "laurenziosambany@gmail.com",
+      "password": "$2a$10$aLKk7B./LsV7SY13UIHh1.aQeR5GQEbOtBLhDJ/5/HOtqAoC7Xg6S"
+    }
+  ],
+  "_users": [
+    {
+      "nb": 3
+    }
   ]
 }

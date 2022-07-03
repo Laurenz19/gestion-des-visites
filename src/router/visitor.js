@@ -1,6 +1,6 @@
 const express = require('express')
 const generatedId = require('../services/services')
-
+const {authenticateToken} = require('../controller/authentication')
 
 const router = express.Router()
 
@@ -29,7 +29,6 @@ const idlength = 5
  *                  type: string
  *                  description: the visitor's address
  *          example:
- *              id: "V-0001"
  *              name: "Sambany Michel Laurenzio"
  *              address: "Tanambao, Fianarantsoa"
  *                  
@@ -61,7 +60,7 @@ const idlength = 5
  *                              $ref: '#/components/schemas/Visitor'
  */
 
-router.get("/", (req, res)=>{
+router.get("/", authenticateToken, (req, res)=>{
     const visitors = req.app.db.get("visitors")
     res.send(visitors)
 })
@@ -93,7 +92,7 @@ router.get("/", (req, res)=>{
  *               
  */
 
- router.get("/:visitor_name", (req, res)=>{
+ router.get("/:visitor_name", authenticateToken, (req, res)=>{
     console.log(req.params.name)
     const visitor = req.app.db.get("visitors").find({name: req.params.visitor_name}).value()
     if(!visitor){
@@ -130,7 +129,7 @@ router.get("/", (req, res)=>{
  *               
  */
 
-router.get("/:id", (req, res)=>{
+router.get("/:id", authenticateToken, (req, res)=>{
     const visitor = req.app.db.get("visitors").find({id: req.params.id}).value()
     if(!visitor){
         res.sendStatus(404)
@@ -163,7 +162,7 @@ router.get("/:id", (req, res)=>{
  *          '500':
  *              description: Some server error
  */
-router.post("/", (req, res)=>{
+router.post("/", authenticateToken, (req, res)=>{
     try {
 
         console.log()
@@ -218,7 +217,7 @@ router.post("/", (req, res)=>{
  *              description: Some server error
  */
 
-router.put("/:id", (req, res)=>{
+router.put("/:id", authenticateToken, (req, res)=>{
     try {
         const visitor = req.app.db.get("visitors").find({id: req.params.id})
 
@@ -255,7 +254,7 @@ router.put("/:id", (req, res)=>{
  *          '404':
  *              description: The visitor was not found
  */
-router.delete("/:id", (req, res)=>{
+router.delete("/:id", authenticateToken, (req, res)=>{
 
     const visitor = req.app.db.get("visitors").find({id: req.params.id})
 
